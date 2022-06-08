@@ -1,26 +1,27 @@
 set number
 syntax on
+set tabstop=4
+set autoindent
+set noexpandtab
+set softtabstop=0
+set shiftwidth=4
+set splitright
+set termwinsize=4x0
+
+"THEME:
 
 set background=dark
 let g:gruvbox_italic=1 "May not work well: works on xfce4-terminal, urxvt or gnome-terminal
 colorscheme gruvbox
 " curl https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim >> ~/.vim/colors/gruvbox.vim
+"font: Source Code Pro Semibold (AUR ttf-adobe-source-fonts) 
 
 "Use 24-bit (true-color)
 if (has("termguicolors"))
 	set termguicolors
 endif
 
-set tabstop=4
-set autoindent
-set noexpandtab
-set softtabstop=0
-set shiftwidth=4
-
-set splitright
-set termwinsize=4x0
-
-cabbrev term bo term
+"FOLDING:
 
 autocmd FileType c setlocal foldmethod=syntax
 "setlocal foldmethod=indent
