@@ -13,7 +13,8 @@ set termwinsize=4x0
 set background=dark
 let g:gruvbox_italic=1 "May not work well: works on xfce4-terminal, urxvt or gnome-terminal
 colorscheme gruvbox
-" curl https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim >> ~/.vim/colors/gruvbox.vim
+" curl https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim > ~/.vim/colors/gruvbox.vim
+
 "font: Source Code Pro Semibold (AUR ttf-adobe-source-fonts) 
 
 "Use 24-bit (true-color)
