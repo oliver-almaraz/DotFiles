@@ -6,29 +6,38 @@ set noexpandtab
 set softtabstop=0
 set shiftwidth=4
 set splitright
-set termwinsize=4x0
+set termwinsize=5x0
 
-"THEME:
+" Automatically closing pairs:
+ino " ""<left>
+ino ' ''<left>
+ino ( ()<left>
+ino [ []<left>
+ino { {}<left>
+ino {<CR> {<CR>}<ESC>O<Tab>
+
+"THEME
 
 set background=dark
 let g:gruvbox_italic=1 "May not work well: works on xfce4-terminal, urxvt or gnome-terminal
 colorscheme gruvbox
-" curl https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim > ~/.vim/colors/gruvbox.vim
+" AUR: vim-gruvbox-git vim-airline-gruvbox-git
+" Or: curl https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim > ~/.vim/colors/gruvbox.vim
+" Font: Source Code Pro Semibold (AUR ttf-adobe-source-fonts)
 
-"font: Source Code Pro Semibold (AUR ttf-adobe-source-fonts) 
 
 "Use 24-bit (true-color)
 if (has("termguicolors"))
 	set termguicolors
 endif
 
-"FOLDING:
+"FOLDS
 
 autocmd FileType c setlocal foldmethod=syntax
 "setlocal foldmethod=indent
 "set foldnestmax=2
 "open all folds when oppening file:
-autocmd BufWinEnter * silent! :%foldopen!
+"autocmd BufWinEnter * silent! :%foldopen!
 
 augroup remember_folds
     autocmd!
