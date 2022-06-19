@@ -5,6 +5,7 @@ set autoindent
 set noexpandtab
 set softtabstop=0
 set shiftwidth=4
+set nowrap
 set splitright
 set termwinsize=5x0
 
