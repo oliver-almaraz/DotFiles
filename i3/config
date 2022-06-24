@@ -1,0 +1,204 @@
+#############################################################
+#                    ~/.config./i3/
+############################################################
+
+### Wallpaper ~/.config/nitrogen
+
+### Instalar brightnessctl
+
+### rofi-theme-selector
+
+### Configuración del teclado
+## /etc/X11/xorg.conf.d/00-keyboard.conf
+#Section "InputClass"
+#        Identifier "system-keyboard"
+#        MatchIsKeyboard "on"
+#        Option "XkbLayout" "latam"
+#EndSection
+
+### Activar transparencia:
+# pacman -S picom
+
+### Configuración del mousepad:
+# /etc/X11/xorg.conf.d/90-touchpad.conf (crear dir):
+#Section "InputClass"
+#        Identifier "touchpad"
+#        MatchIsTouchpad "on"
+#        Driver "libinput"
+#        Option "Tapping" "on"
+#        Option "VertTwoFingerScroll" "on"
+#        Option "HorizTwoFingerScroll" "on"
+#EndSection
+
+bar {
+    status_command i3status
+	
+	colors { 
+         statusline #00A5A8
+         #                  border  backgr. text
+         focused_workspace   #000000 #00A5A8 #000000
+        }
+}
+
+set $mod Mod4
+
+#Atajos personalizados
+bindsym $mod+w exec firefox
+bindsym $mod+c exec code
+bindsym $mod+e exec thunar
+bindsym $mod+z exec zoom
+bindsym $mod+o exec okular
+bindsym $mod+t exec xfce4-terminal
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
+bindsym $mod+a exec pavucontrol
+bindsym $mod+Shift+p exec poweroff
+
+new_window pixel 1
+new_float pixel 1
+
+hide_edge_borders none
+
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+font xft:URWGothic-Book 11
+
+floating_modifier $mod
+
+# Window kill command
+bindsym $mod+q kill
+
+# start program launcher
+bindsym $mod+d exec --no-startup-id rofi -show run
+
+# change focus
+bindsym $mod+Shift+Left focus left
+bindsym $mod+Shift+Down focus down
+bindsym $mod+Shift+Up focus up
+bindsym $mod+Shift+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+i move up
+bindsym $mod+Shift+l move right
+
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+# split orientation
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+
+# workspaces
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+
+# Open specific applications in floating mode
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Skype"] floating enable border normal
+for_window [class="zoom"] floating enable
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Autostart applications
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id nm-applet
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id $HOME/.config/polybar/i3wmthemer_bar_launch.sh
+
+# Theme colors
+client.focused #b0c4bb #2f2f38 #b0c4bb #00A5A8 #00A5A8
+client.focused_inactive #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+client.unfocused #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+client.urgent #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+client.placeholder #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+
+client.background #2f2f38
+
+# Gaps
+gaps top 500
+gaps inner 10
+gaps outer -4
+
+smart_gaps on
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pulseaudio-ctl up 5 %#increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pulseaudio-ctl down 5 % #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pulseaudio-ctl mute # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +20
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 20-
